@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/profiles/profile-detail.css' %}" />
+{% endblock %}
+
+
+{% block content %}
+    <section class="profile-container">
+        {% if profile %}
+            <section class="profile-info-container">
+                <h1>Profile Container</h1>
+                    <h2> {{ profile.header }}</h2>
+                    <h2> {{ profile.subheader }}</h2>
+                    <h2> {{ profile.profile_image }}</h2>
+                    <p> {{ profile.about }}</p>
+                    
+                    {% if request.user == profile.user %}
+                        <a href="{% url 'profile-update' profile.id %}"><button>Edit Profile</button></a>
+                        <a href="{% url 'profile-delete' profile.id %}"><button>Delete Profile</button></a>
+                    {% endif %}
+            </section>
+
+
+            <section class="job-history-container">
+                <h1>Job History Container</h1>
+                {% if job_histories %}
+                    {% for job in job_histories %}
+                        <div class ='card'>
+                            <h3>{{job.company}}</h3>
+                            <h4>{{job.title}}</h4>
+                            <a href="{% url 'job-history-update' job.id %}"><button>Update</button></a>
+                            <a href="{% url 'job-history-delete' job.id %}"><button>Delete</button></a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No work history posted</p>
+                {% endif %}
+                {% if request.user == profile.user %}
+                    <a href="{% url 'job-history-create' %}"><button>Add Job History</button></a>
+                {% endif %}
+            </section>
+
+            <section class="edu-history-container">
+                <h1>Edu History Container</h1>
+                {% if edu_histories %}
+                    {% for edu in edu_histories %}
+                        <div class ='card'>
+                            <h3>{{edu.name_school}}</h3>
+                            <h4>{{edu.name_major}}</h4>
+                            <a href="{% url 'edu-history-update' edu.id %}"><button>Update</button></a>
+                            <a href="{% url 'edu-history-delete' edu.id %}"><button>Delete</button></a>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No education history posted</p>
+                {% endif %}
+                {% if request.user == profile.user %}
+                    <a href="{% url 'edu-history-create' %}"><button>Add Education</button></a>
+                {% endif %}
+
+            </section>
+        {% endif %}
+    </section>
+{% endblock %}

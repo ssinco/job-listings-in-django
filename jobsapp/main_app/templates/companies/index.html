@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+{% comment %} <link rel="stylesheet" href="{% static 'css/profiles/profile-index.css' %}" /> {% endcomment %}
+{% endblock %}
+
+
+{% block content %}
+
+<section class="component-container">
+    <h1>This is the company page</h1>
+    <section class="companies-container">
+        {% for company in companies %}
+            <div class ='card'>
+                <h3>{{company.name}}</h3>
+                <h4>{{company.about}}</h4>
+                {% comment %} <a href = "{% url 'company-detail' company.id %}"><button>View Company</button></a> {% endcomment %}
+            </div>
+        {% endfor %}
+    </section>
+    <a href="{% url 'company-create' %}"><button>Add Company</button></a>
+</section>
+
+
+{% endblock %}
