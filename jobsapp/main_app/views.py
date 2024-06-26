@@ -8,10 +8,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse, reverse_lazy
+from django.db.models.functions import Greatest
+from django.contrib.auth.models import User
 
 
 from .models import Profile, EduHistory, JobHistory, Company
-from .forms import JobHistoryForm, EduHistoryForm
+from .forms import JobHistoryForm, EduHistoryForm, AddOwnersForm
 
 def signup(request):
     # Handle the POST request
@@ -29,7 +31,9 @@ def signup(request):
     return render(request, 'signup.html', {'form': form, 'error_message': error_message})
 
 def company_index(request):
-    companies = Company.objects.all()
+    companies = Company.objects.annotate(
+        most_recent=Greatest('created_at', 'updated_at')
+    ).order_by('-most_recent')
     return render(request,'companies/index.html',{'companies':companies})
 
 def profile_index(request):
@@ -63,8 +67,8 @@ class Home(LoginView):
 class ProfileCreate (LoginRequiredMixin, CreateView):
     model = Profile
     fields = [
-        'header',
-        'subheader',
+        'full_name',
+        'headline',
         'location',
         'about',
     ]
@@ -82,8 +86,8 @@ class ProfileCreate (LoginRequiredMixin, CreateView):
 class ProfileUpdate (LoginRequiredMixin, UpdateView):
     model = Profile
     fields = [
-        'header',
-        'subheader',
+        'full_name',
+        'headline',
         'location',
         'about',
     ]
@@ -201,7 +205,57 @@ class CompanyCreate (LoginRequiredMixin, CreateView):
     success_url = '/companies'
 
     def form_valid(self, form):
-        # Assign the logged in user (self.request.user)
-        form.instance.user = self.request.user  # form.instance is the cat
-        # Let the CreateView do its job as usual
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        # Add the current user as an owner of the company
+        self.object.page_owners.add(self.request.user)
+        return response
+
+class CompanyUpdate (LoginRequiredMixin, UpdateView):
+    model = Company
+    fields = [
+        'name',
+        'about',
+        'location',
+        'employee_count',
+        'industry',
+    ]
+    success_url = '/companies'
+   
+class CompanyDelete(LoginRequiredMixin, DeleteView):
+    model = Company
+    success_url = '/companies'
+
+
+def company_detail(request, company_id):
+    company = Company.objects.get(id=company_id)
+
+    # job_histories = JobHistory.objects.filter(profile=profile)
+    # edu_histories = EduHistory.objects.filter(profile=profile)
+
+    return render(request,'companies/detail.html', {
+        'company': company,
+        # 'job_histories': job_histories,
+        # 'edu_histories': edu_histories,
+    })
+
+
+@login_required
+
+def add_owner(request, company_id):
+    company = get_object_or_404(Company, id=company_id)
+
+    # Only page owners can access the add owners form
+    if request.user not in company.page_owners.all():
+        return redirect('company-detail', company_id=company_id)
+
+    if request.method == 'POST':
+        form = AddOwnersForm(request.POST, owners_queryset=User.objects.exclude(id__in=company.page_owners.values_list('id', flat=True)))
+        if form.is_valid():
+            new_owners = form.cleaned_data['new_owners']
+            for new_owner in new_owners:
+                company.page_owners.add(new_owner)
+            return redirect('company-detail', company_id=company.id)
+    else:
+        form = AddOwnersForm(owners_queryset=User.objects.exclude(id__in=company.page_owners.values_list('id', flat=True)))
+
+    return render(request, 'main_app/add_owner_form.html', {'form': form, 'company': company})

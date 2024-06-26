@@ -1,0 +1,22 @@
+* {
+    border: 1px dotted rgba(194, 194, 194, 0.124);
+}
+
+body {
+    margin: 0 5% 0 5%;
+}
+
+.nav-container{
+    display:flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+    gap: 10px;
+}
+

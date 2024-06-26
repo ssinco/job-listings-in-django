@@ -8,8 +8,8 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     
-    header = models.CharField(max_length=30)
-    subheader = models.CharField(max_length=60)
+    full_name = models.CharField(max_length=30)
+    headline = models.CharField(max_length=60)
     location = models.CharField(max_length=60)
     about = models.TextField(max_length=250)
     profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)  # Add this line
@@ -49,6 +49,7 @@ EMPLOYEE_COUNT = (
 
 
 class Company(models.Model):
+    page_owners = models.ManyToManyField(User, related_name='companies')
     name = models.CharField(max_length=30)
     about = models.TextField(max_length=250)
     location = models.CharField(max_length=60)
@@ -62,6 +63,8 @@ class Company(models.Model):
         choices=INDUSTRIES,
         default=INDUSTRIES[0][0]
     )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True) 
 
     def __str__(self):
         return f"{self.name}"

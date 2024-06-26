@@ -11,9 +11,10 @@
 
 <section class="component-container">
     <section class="my-profile-container">
+        <p>{{user}}</p>
         {% if me %}
-            <h2> {{ me.header }}</h2>
-            <h2> {{ me.subheader }}</h2>
+            <h2> {{ me.full_name }}</h2>
+            <h2> {{ me.headline }}</h2>
             <h2> {{ me.profile_image }}</h2>
         {% comment %} <h4> {% me.subheader %}</h4> {% endcomment %}
             <a href = "{% url 'profile-detail' me.id %}"><button>View My Profile</button></a>
@@ -27,8 +28,8 @@
     <section class="profiles-container">
         {% for profile in profiles %}
             <div class ='card'>
-                <h3>{{profile.header}}</h3>
-                <h4>{{profile.subheader}}</h4>
+                <h3>{{profile.full_name}}</h3>
+                <h4>{{profile.headline}}</h4>
                 <a href = "{% url 'profile-detail' profile.id %}"><button>View Profile</button></a>
             </div>
         

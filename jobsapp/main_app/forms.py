@@ -1,5 +1,6 @@
 from django import forms
-from .models import JobHistory, EduHistory
+from .models import JobHistory, EduHistory, Company
+from django.contrib.auth.models import User
 
 class JobHistoryForm(forms.ModelForm):
     date_start = forms.DateField(
@@ -29,3 +30,16 @@ class EduHistoryForm(forms.ModelForm):
     class Meta:
         model = EduHistory
         fields = ['name_school', 'name_major', 'date_start', 'date_end']
+
+
+class AddOwnersForm(forms.ModelForm):
+    new_owners = forms.ModelMultipleChoiceField(queryset=User.objects.none(), required=True)
+
+    class Meta:
+        model = Company
+        fields = []
+
+    def __init__(self, *args, **kwargs):
+        owners_queryset = kwargs.pop('owners_queryset', User.objects.none())
+        super(AddOwnersForm, self).__init__(*args, **kwargs)
+        self.fields['new_owners'].queryset = owners_queryset

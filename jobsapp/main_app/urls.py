@@ -25,6 +25,12 @@ urlpatterns = [
 
     # Routes for company
     path('companies/', views.company_index, name ='company-index'),
+    path('companies/<int:company_id>', views.company_detail, name ='company-detail'),
     path('company/create/',views.CompanyCreate.as_view(), name ='company-create'),
+
+    path('company/<int:pk>/update/',views.CompanyUpdate.as_view(), name ='company-update'),
+    path('company/<int:pk>/delete/',views.CompanyDelete.as_view(), name ='company-delete'),
+
+    path('company/<int:company_id>/add-owner/',views.add_owner, name ='company-add-owner'),
 
 ]

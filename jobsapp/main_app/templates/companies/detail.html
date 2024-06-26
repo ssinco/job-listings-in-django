@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/profiles/profile-detail.css' %}" />
+{% endblock %}
+
+
+{% block content %}
+    <section class="company-container">
+    
+        <section class="profile-info-container">
+            <h1>{{company.name}}</h1>
+                <h2> {{ company.about }}</h2>
+                <h2> {{ company.location }}</h2>
+                <h2> {{ company.employee_count }}</h2>
+                <h2> {{ company.employee_industry }}</h2>
+                
+                {% if request.user in company.page_owners.all %}
+                <div class="buttons">
+                    <a href="{% url 'company-update' company.id %}"><button>Edit</button></a>
+                    <a href="{% url 'company-delete' company.id %}"><button>Delete</button></a>
+                    <a href="{% url 'company-add-owner' company.id %}"><button>Add Admins</button></a>
+                </div>
+                <div>
+                    {% for page_owner in company.page_owners.all %}
+                        <p>{{page_owner}}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+
+        </section>
+    </section>
+{% endblock %}
