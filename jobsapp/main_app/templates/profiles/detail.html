@@ -10,21 +10,35 @@
 {% block content %}
     <section class="profile-container">
         {% if profile %}
-            <section class="profile-info-container">
-                <h1>Profile Container</h1>
-                    <h2> {{ profile.full_name }}</h2>
-                    <h2> {{ profile.headline }}</h2>
-                    <h2> {{ profile.profile_image }}</h2>
+            <section class="section-container">
+                <div class ="profile">
+                    <div class ="profile-pic-and-bio">
+                        <div class = "pic">
+                            <img src="" alt="img"/>
+                            <h2> {{ profile.profile_image }}</h2>
+                        </div>
+                        <div class = "bio">
+                            <h1> {{ profile.full_name }} </h1>
+                            <h3> {{ profile.headline }} </h3>
+                            <p> {{ profile.location }} </p>
+                        </div>
+                    </div>
+                    <div class = "buttons">
+                        {% if request.user == profile.user %}
+                            <a href="{% url 'profile-update' profile.id %}"><button>•••</button></a>
+                            <a href="{% url 'profile-delete' profile.id %}"><button>&times</button></a>
+                        {% endif %}
+                    </div>
+                </div>
+                <hr>
+                <div class = "profile-about">
                     <p> {{ profile.about }}</p>
-                    
-                    {% if request.user == profile.user %}
-                        <a href="{% url 'profile-update' profile.id %}"><button>Edit Profile</button></a>
-                        <a href="{% url 'profile-delete' profile.id %}"><button>Delete Profile</button></a>
-                    {% endif %}
+                </div>
+                
             </section>
 
 
-            <section class="job-history-container">
+            <section class="section-container">
                 <h1>Job History Container</h1>
                 {% if job_histories %}
                     {% for job in job_histories %}
@@ -43,7 +57,7 @@
                 {% endif %}
             </section>
 
-            <section class="edu-history-container">
+            <section class="section-container">
                 <h1>Edu History Container</h1>
                 {% if edu_histories %}
                     {% for edu in edu_histories %}

@@ -15,37 +15,39 @@
 </head>
 
 <body>
-    <header class ="nav-container">
-        <div class="header-logo-container">
-            <a href="/">
-                <img src="{% static 'images/header-logo.svg' %}" alt="Django Jobs Logo" />
-            </a>
-        </div>
-        <nav>
-            <ul>
-                {% if user.is_authenticated %}
-                {% comment %} <li><a href="{% url 'profile-create' %}">Create Profile</a></li> {% endcomment %}
-                <li><a href="{% url 'profile-index' %}">All Profiles</a></li>
-                <li><a href="{% url 'company-index' %}">All Companies</a></li>
-                <li>
-                    <form id="logout-form" method="post" action="{% url 'logout' %}">
-                        {% csrf_token %}
-                        <button type="submit">Log out</button>
-                    </form>
-                </li>
+    
+        <header class ="nav-container">
+            <div class="header-logo-container">
+                <a href="/">
+                    
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    {% if user.is_authenticated %}
+                    {% comment %} <li><a href="{% url 'profile-create' %}">Create Profile</a></li> {% endcomment %}
+                    <li><a href="{% url 'profile-index' %}">All Profiles</a></li>
+                    <li><a href="{% url 'company-index' %}">All Companies</a></li>
+                    <li>
+                        <form id="logout-form" method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit">Log out</button>
+                        </form>
+                    </li>
 
-                {% else %}
-                <li><a href="{% url 'home' %}">Login</a></li>
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                {% endif %}
+                    {% else %}
+                    <li><a href="{% url 'home' %}">Login</a></li>
+                    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                    {% endif %}
 
-            </ul>
-        </nav>
-    </header>
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+                </ul>
+            </nav>
+        </header>
+    
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
 </body>
 
 </html>

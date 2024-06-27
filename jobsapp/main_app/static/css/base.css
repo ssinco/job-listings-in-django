@@ -1,15 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
 * {
-    border: 1px dotted rgba(194, 194, 194, 0.124);
+    /* border: 1px dotted rgba(194, 194, 194, 0.124); */
+    box-sizing:  border-box;
+}
+
+h1, h2, h3, h4, h5, p {
+    margin: 0;
+}
+
+h1 {
+    font-size: 1.5em;
+}
+
+hr {
+    margin: 20px 0 20px 0;
+    border: none; /* Remove default border */
+    height: 0.75px; /* Set the height of the hr */
+    background-color: #d1d1d1; /* Change the color to your desired color */
 }
 
 body {
-    margin: 0 5% 0 5%;
+    margin: 0;
+    background-color: rgb(230, 236, 231);
+    font-family: 'Source Sans 3', sans-serif;
 }
 
 .nav-container{
     display:flex;
     align-items: baseline;
     justify-content: space-between;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    padding: 0 5%;
 }
 
 nav ul {
@@ -17,6 +41,35 @@ nav ul {
     display: flex;
     align-items: baseline;
     justify-content: space-around;
-    gap: 10px;
+    gap: 15px;
+    font-size: 1.1em;
 }
 
+button {
+    background-color: rgb(39, 127, 106);
+    color: white;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    letter-spacing: 0.05em;
+}
+
+
+/* Styling for button hover state */
+button:hover {
+    background-color: rgb(29, 97, 81); /* Darker shade on hover */
+    transform: scale(1.01); /* Slightly increase the size */
+    cursor: pointer; 
+}
+
+/* Styling for button focus state */
+button:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 5px rgba(39, 127, 106, 0.5); /* Add a custom focus shadow */
+}
+
+/* Styling for button active state */
+button:active {
+    background-color: rgb(20, 80, 65); /* Even darker shade on active */
+    transform: scale(0.98); /* Slightly decrease the size */
+}

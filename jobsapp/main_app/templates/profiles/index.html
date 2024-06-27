@@ -10,27 +10,46 @@
 {% block content %}
 
 <section class="component-container">
-    <section class="my-profile-container">
-        <p>{{user}}</p>
-        {% if me %}
-            <h2> {{ me.full_name }}</h2>
-            <h2> {{ me.headline }}</h2>
-            <h2> {{ me.profile_image }}</h2>
-        {% comment %} <h4> {% me.subheader %}</h4> {% endcomment %}
-            <a href = "{% url 'profile-detail' me.id %}"><button>View My Profile</button></a>
-
-        {% else %}
-            <p>You don't have a profile yet!<p>
-            <a href = "{% url 'profile-create' %}"><button>Create Profile</button></a>
-        {% endif %}
+    <section class="profile-card me">
+        <div class ="profile-preview">
+            {% if me %}
+            <div class = "profile-pic">
+                <img src="" alt="img"/>
+            </div>
+            <div class = "profile-bio">
+                <h2> {{ me.full_name }}</h2>
+                <h3> {{ me.headline }}</h3>
+                <h3> {{ me.profile_image }}</h3>
+            </div>
+        </div>
+            <div class = "buttons">
+                <a href = "{% url 'profile-detail' me.id %}"><button>View My Profile</button></a>
+            </div>
+            {% else %}
+            <div>
+                <p>You don't have a profile yet!<p>
+                <a href = "{% url 'profile-create' %}"><button>Create Profile</button></a>
+            </div>
+            {% endif %}
     </section>
 
+    <hr>
     <section class="profiles-container">
         {% for profile in profiles %}
-            <div class ='card'>
-                <h3>{{profile.full_name}}</h3>
-                <h4>{{profile.headline}}</h4>
-                <a href = "{% url 'profile-detail' profile.id %}"><button>View Profile</button></a>
+            <div class ='profile-card'>
+                <div class = "profile-preview">
+                    <div class = "profile-pic">
+                        <img src="" alt="img"/>
+                    </div>
+                    <div class = "profile-bio">
+                        <h3>{{profile.full_name}}</h3>
+                        <h4>{{profile.headline}}</h4>
+                        <h4>{{profile.location}}</h4>
+                    </div>
+                </div>
+                <div class = "buttons">
+                    <a href = "{% url 'profile-detail' profile.id %}"><button>View Profile</button></a>
+                </div>
             </div>
         
         {% endfor %}

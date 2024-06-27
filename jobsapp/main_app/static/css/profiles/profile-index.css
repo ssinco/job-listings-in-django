@@ -6,6 +6,9 @@
 .component-container {
     margin: 0 auto;
     padding: 50px;
+    width: 80vw; /* 4/5 of the viewport width */
+    max-width: 1600px; /* Maximum width of 1600px */
+    min-width: 500px;
 }
 
 .profiles-container {
@@ -16,8 +19,47 @@
 
 }
 
-.card {
-    padding: 20px;
-    border: 1px dotted rgb(194, 194, 194);
+.me {
+    min-height: 200px;
 }
+
+
+.profile-card {
+    padding: 20px;
+    border: 1px solid rgb(194, 194, 194);
+    background-color: white;
+    margin: 20px 0 20px 0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center items vertically */
+}
+
+.profile-preview{
+    display: flex;
+    align-items: center; /* Center items vertically */
+    gap: 15px;
+
+    img {
+        background-color: grey;
+        border-radius: 50%;
+        min-height: 75px;
+        min-width: 75px;
+    }   
+}
+
+.profile-bio{
+    display:flex;
+    /* align-items: space-evenly; */
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+
 
