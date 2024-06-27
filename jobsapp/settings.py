@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-^$+)c!nxes8@z@vkh*^($6z39=d=q7-wycftoa1h8sl*y=*3$^'
 
-SECRET_KEY = os.getenv('567UkKZAp46m')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -58,9 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    "django.middleware.security.SecurityMiddleware",
-    # Add this. It MUST be added after the line above: 
+    
     "whitenoise.middleware.WhiteNoiseMiddleware",
     # Other items below
 
