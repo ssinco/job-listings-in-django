@@ -7,7 +7,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% comment %} <link rel="shortcut icon" type="image/png" href="{% static 'images/splash.svg' %}" /> {% endcomment %}
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
     <title>Contacts Log</title>
     <link rel="stylesheet" href="{% static 'css/base.css' %}" />
     {% block head %}
@@ -15,17 +15,15 @@
 </head>
 
 <body>
-    
         <header class ="nav-container">
             <div class="header-logo-container">
                 <a href="/">
-                    
+                    <img src="{% static 'images/company_logo.png' %}" alt="company-logo"/>
                 </a>
             </div>
             <nav>
                 <ul>
                     {% if user.is_authenticated %}
-                    {% comment %} <li><a href="{% url 'profile-create' %}">Create Profile</a></li> {% endcomment %}
                     <li><a href="{% url 'profile-index' %}">All Profiles</a></li>
                     <li><a href="{% url 'company-index' %}">All Companies</a></li>
                     <li>

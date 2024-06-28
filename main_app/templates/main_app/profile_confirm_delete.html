@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}" />
+{% endblock %}
+
 {% block content %}
-<div class="page-header">
-    <h1>Delete Profile</h1>
-</div>
-
-<h2>Are you sure you want to delete your profile?</h2>
-
-<form action="" method="post" class="form">
-    {% csrf_token %}
-    <a href="{% url 'profile-detail' profile.id %}" class="btn secondary">Cancel</a>
-    <button type="submit" class="btn danger">Delete Profile</button>
-</form>
+<section class = "component-container">
+    <div class = "section-container">
+        <div class="page-header">
+            <h1>Delete Profile</h1>
+            <h2>Are you sure you want to delete your profile?</h2>
+        </div>
+        <form action="" method="post" class="form">
+            {% csrf_token %}
+            <a href="{% url 'profile-detail' profile.id %}" class="btn secondary">Cancel</a>
+            <button type="submit" class="btn danger">Delete Profile</button>
+        </form>
+    </div>
+</section>
 
 {% endblock %}

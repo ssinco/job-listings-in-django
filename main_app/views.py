@@ -71,6 +71,7 @@ class ProfileCreate (LoginRequiredMixin, CreateView):
         'headline',
         'location',
         'about',
+        'profile_image',
     ]
 
     def get_success_url(self):
@@ -90,6 +91,7 @@ class ProfileUpdate (LoginRequiredMixin, UpdateView):
         'headline',
         'location',
         'about',
+        'profile_image',
     ]
     def get_success_url(self):
         # Redirect to the profile detail page after editing
@@ -201,6 +203,7 @@ class CompanyCreate (LoginRequiredMixin, CreateView):
         'location',
         'employee_count',
         'industry',
+        'company_image',
     ]
     success_url = '/companies'
 
@@ -218,6 +221,7 @@ class CompanyUpdate (LoginRequiredMixin, UpdateView):
         'location',
         'employee_count',
         'industry',
+        'company_image',
     ]
     success_url = '/companies'
    
