@@ -34,3 +34,4 @@ urlpatterns = [
     path('company/<int:company_id>/add-owner/',views.add_owner, name ='company-add-owner'),
 
 ]
+

@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 
 * {
-    /* border: 1px dotted rgba(194, 194, 194, 0.124); */
     box-sizing:  border-box;
 }
 
@@ -15,26 +14,41 @@ h1 {
 
 hr {
     margin: 20px 0 20px 0;
-    border: none; /* Remove default border */
-    height: 0.75px; /* Set the height of the hr */
-    background-color: #d1d1d1; /* Change the color to your desired color */
+    border: none;
+    height: 0.75px; 
+    background-color: #d1d1d1; 
+}
+
+body, h1, h2, h3, h4, h5, p, input, textarea {
+    font-family: 'Source Sans 3', sans-serif;
 }
 
 body {
     margin: 0;
     background-color: rgb(230, 236, 231);
-    font-family: 'Source Sans 3', sans-serif;
 }
 
 .nav-container{
     display:flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     background-color: white;
     position: sticky;
     top: 0;
     padding: 0 5%;
+    a {
+        text-decoration: none; 
+        color: inherit;
+    }
+    
+    a:hover {
+        text-decoration: none; 
+        color: inherit;
+        opacity: 50%;
+    }
 }
+
+
 
 nav ul {
     list-style: none;
@@ -55,21 +69,36 @@ button {
 }
 
 
-/* Styling for button hover state */
+
 button:hover {
-    background-color: rgb(29, 97, 81); /* Darker shade on hover */
-    transform: scale(1.01); /* Slightly increase the size */
+    background-color: rgb(29, 97, 81);
+    transform: scale(1.01);
     cursor: pointer; 
 }
 
-/* Styling for button focus state */
+
 button:focus {
-    outline: none; /* Remove default focus outline */
-    box-shadow: 0 0 5px rgba(39, 127, 106, 0.5); /* Add a custom focus shadow */
+    outline: none; 
+    box-shadow: 0 0 5px rgba(39, 127, 106, 0.5); 
 }
 
-/* Styling for button active state */
+
 button:active {
-    background-color: rgb(20, 80, 65); /* Even darker shade on active */
-    transform: scale(0.98); /* Slightly decrease the size */
+    background-color: rgb(20, 80, 65);
+    transform: scale(0.98); 
+}
+
+.header-logo-container {
+    width:60px;
+    height:60px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 75%;
+        height: 75%;
+        object-fit: cover; 
+    }   
 }

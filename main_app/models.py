@@ -11,12 +11,11 @@ class Profile(models.Model):
     full_name = models.CharField(max_length=30)
     headline = models.CharField(max_length=60)
     location = models.CharField(max_length=60)
-    about = models.TextField(max_length=250)
-    profile_image = models.ImageField(upload_to='profile_images/', null=True, blank=True)  # Add this line
-
+    about = models.TextField(max_length=1000)
+    profile_image = models.ImageField(upload_to='profile_images/', default='profile_images/default_profile_icon.png', null=True, blank=True)
 
     def __str__(self):
-        return self.header
+        return self.full_name
 
 
 class EduHistory(models.Model):
@@ -25,6 +24,7 @@ class EduHistory(models.Model):
     name_major = models.CharField(max_length=30)
     date_start = models.DateField('Start Date')
     date_end = models.DateField('End Date', null=True, blank=True)
+    school_image = models.ImageField(upload_to='school_images/', default='school_images/default_school_icon.png', null=True, blank=True)
 
     def __str__(self):
         return f"{self.name_school} at {self.name_major}"
@@ -51,8 +51,9 @@ EMPLOYEE_COUNT = (
 class Company(models.Model):
     page_owners = models.ManyToManyField(User, related_name='companies')
     name = models.CharField(max_length=30)
-    about = models.TextField(max_length=250)
+    about = models.TextField(max_length=1000)
     location = models.CharField(max_length=60)
+    company_image = models.ImageField(upload_to='company_images/', default='company_images/default_company_icon.png', null=True, blank=True)
     employee_count = models.CharField(
         max_length=20,
         choices=EMPLOYEE_COUNT,
@@ -76,7 +77,7 @@ class JobHistory(models.Model):
     company = models.ForeignKey(Company, on_delete=models.DO_NOTHING)
 
     title = models.CharField(max_length=30)
-    description = models.TextField(max_length=250)
+    description = models.TextField(max_length=1000)
     date_start = models.DateField('Start Date')
     date_end = models.DateField('End Date', null=True, blank=True)
 
@@ -85,6 +86,9 @@ class JobHistory(models.Model):
 
     def end_date_display(self):
         return self.date_end if self.date_end else "Present"
+
+    def get_company_image_url(self):
+        return self.company.company_image.url if self.company.company_image else None
 
 
 

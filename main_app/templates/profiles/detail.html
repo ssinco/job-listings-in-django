@@ -13,9 +13,12 @@
             <section class="section-container">
                 <div class ="profile">
                     <div class ="profile-pic-and-bio">
-                        <div class = "pic">
-                            <img src="" alt="img"/>
-                            <h2> {{ profile.profile_image }}</h2>
+                        <div class = "profile-pic">
+                            {% if profile.profile_image %}
+                            <img src="{{ profile.profile_image.url }}" alt="user-profile-image"/>
+                            {% else %}
+                            <img src="{% static 'images/default_profile_icon.png' %}" alt="default-profile-image"/>
+                            {% endif %}
                         </div>
                         <div class = "bio">
                             <h1> {{ profile.full_name }} </h1>
@@ -39,40 +42,81 @@
 
 
             <section class="section-container">
-                <h1>Job History Container</h1>
+                <h2>Work History</h2>
                 {% if job_histories %}
                     {% for job in job_histories %}
                         <div class ='card'>
-                            <h3>{{job.company}}</h3>
-                            <h4>{{job.title}}</h4>
-                            <a href="{% url 'job-history-update' job.id %}"><button>Update</button></a>
-                            <a href="{% url 'job-history-delete' job.id %}"><button>Delete</button></a>
+                            <div class = "profile">
+                                <div class ="profile-pic-and-bio">
+                                    <div class = "company-pic">
+                                        {% if job.get_company_image_url %}
+                                        <img src="{{ job.get_company_image_url }}" alt="{{ job.company.name }}">
+                                        {% else %}
+                                        <img src="{% static 'images/default_company_icon.png' %}" alt="Default Company Image">
+                                        {% endif %}
+                                    </div>
+                                    <div class = "bio">
+                                        <h3>{{job.title}}</h3>
+                                        <h4>{{job.company}}</h4>
+                                        <p>{{job.date_start}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{job.date_end}}</p>
+                                    </div>
+                                </div>
+                            
+
+                            <div class = "buttons">
+                                <a href="{% url 'job-history-update' job.id %}"><button>•••</button></a>
+                                <a href="{% url 'job-history-delete' job.id %}"><button>&times</button></a>
+                            </div>
+                            </div>
+
+                            <div class = "profile-about">
+                                <p> {{ job.description|linebreaksbr}}</p>
+                            </div>
                         </div>
+
                     {% endfor %}
                 {% else %}
                     <p>No work history posted</p>
                 {% endif %}
                 {% if request.user == profile.user %}
+                <div class = "add-button">
                     <a href="{% url 'job-history-create' %}"><button>Add Job History</button></a>
+                </div>
                 {% endif %}
             </section>
 
             <section class="section-container">
-                <h1>Edu History Container</h1>
+                <h1>Education</h1>
                 {% if edu_histories %}
                     {% for edu in edu_histories %}
                         <div class ='card'>
-                            <h3>{{edu.name_school}}</h3>
-                            <h4>{{edu.name_major}}</h4>
-                            <a href="{% url 'edu-history-update' edu.id %}"><button>Update</button></a>
-                            <a href="{% url 'edu-history-delete' edu.id %}"><button>Delete</button></a>
+                            <div class = "profile">
+                                <div class ="profile-pic-and-bio">
+                                    {% comment %} <div class = "pic">
+                                        <img src="" alt="img"/>
+                                        <h2> {{ profile.profile_image }}</h2>
+                                    </div> {% endcomment %}
+                                    <div class = "bio">
+                                        <h3>{{edu.name_school}}</h3>
+                                        <h4>{{edu.name_major}}</h4>
+                                        <p>{{edu.date_start}}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{{edu.date_end}}</p>
+
+                                    </div>
+                                </div>
+                                <div class = "buttons">
+                                    <a href="{% url 'edu-history-update' edu.id %}"><button>•••</button></a>
+                                    <a href="{% url 'edu-history-delete' edu.id %}"><button>&times</button></a>
+                                </div>
+                            </div>
                         </div>
                     {% endfor %}
                 {% else %}
                     <p>No education history posted</p>
                 {% endif %}
                 {% if request.user == profile.user %}
+                <div class = "add-button">
                     <a href="{% url 'edu-history-create' %}"><button>Add Education</button></a>
+                </div>
                 {% endif %}
 
             </section>
