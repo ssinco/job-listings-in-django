@@ -15,7 +15,6 @@ class JobHistoryForm(forms.ModelForm):
     class Meta:
         model = JobHistory
         fields = ['company', 'title', 'description', 'date_start', 'date_end']
-
     
 class EduHistoryForm(forms.ModelForm):
     date_start = forms.DateField(

@@ -13,13 +13,17 @@
     <section class="profile-card me">
         <div class ="profile-preview">
             {% if me %}
-            <div class = "profile-pic">
-                <img src="" alt="img"/>
+            <div class = "me-profile-pic">
+                {% if me.profile_image %}
+                <img src="{{ me.profile_image.url }}" alt="user-profile-image"/>
+                {% else %}
+                <img src="{% static 'images/default_profile_icon.png' %}" alt="default-profile-image"/>
+                {% endif %}
             </div>
             <div class = "profile-bio">
                 <h2> {{ me.full_name }}</h2>
                 <h3> {{ me.headline }}</h3>
-                <h3> {{ me.profile_image }}</h3>
+                <p> {{ me.location }}</p>
             </div>
         </div>
             <div class = "buttons">
@@ -39,12 +43,16 @@
             <div class ='profile-card'>
                 <div class = "profile-preview">
                     <div class = "profile-pic">
-                        <img src="" alt="img"/>
+                        {% if profile.profile_image %}
+                        <img src="{{ profile.profile_image.url }}" alt="user-profile-image"/>
+                        {% else %}
+                        <img src="{% static 'images/default_profile_icon.png' %}" alt="default-profile-image"/>
+                        {% endif %}
                     </div>
                     <div class = "profile-bio">
                         <h3>{{profile.full_name}}</h3>
                         <h4>{{profile.headline}}</h4>
-                        <h4>{{profile.location}}</h4>
+                        <p>{{profile.location}}</p>
                     </div>
                 </div>
                 <div class = "buttons">

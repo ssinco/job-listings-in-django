@@ -3,21 +3,30 @@
 
 
 {% block head %}
-{% comment %} <link rel="stylesheet" href="{% static 'css/profiles/profile-index.css' %}" /> {% endcomment %}
+<link rel="stylesheet" href="{% static 'css/companies/company-index.css' %}" />
 {% endblock %}
 
 
 {% block content %}
 
 <section class="component-container">
-    <h1>This is the company page</h1>
-    <a href="{% url 'company-create' %}"><button>Add Company</button></a>
+    <div class = "header">
+        <a href="{% url 'company-create' %}"><button>Add Company</button></a>
+    </div>
     <section class="companies-container">
         {% for company in companies %}
             <div class ='card'>
+                <div class = "company-pic">
+                    {% if company.company_image %}
+                    <img src="{{ company.company_image.url }}" alt="company-profile-image"/>
+                    {% else %}
+                    <img src="{% static 'images/default_company_icon.png' %}" alt="Default Company Image">
+                    {% endif %}
+                </div>
                 <h3>{{company.name}}</h3>
-                <h4>{{company.about}}</h4>
-                <a href = "{% url 'company-detail' company.id %}"><button>View Company</button></a>
+                
+                    <a href = "{% url 'company-detail' company.id %}"><button>View Company</button></a>
+                
             </div>
         {% endfor %}
     </section>

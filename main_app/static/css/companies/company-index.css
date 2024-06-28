@@ -1,0 +1,45 @@
+.component-container {
+    margin: 0 auto;
+    padding: 50px;
+    width: 80vw; 
+    max-width: 1600px;
+    min-width: 500px;
+}
+
+.card {
+    padding: 20px;
+    border: 1px solid rgb(194, 194, 194);
+    background-color: white;
+    margin: 20px 0 20px 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; 
+    width:300px;
+    h3 {
+        margin: 0 0 20px 0;
+    }
+}
+
+.companies-container {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px; 
+}
+
+.company-pic{
+    width:100px;
+    height:100px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 75%;
+        height: 75%;
+        object-fit: cover; 
+    }   
+}
+

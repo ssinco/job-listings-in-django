@@ -6,15 +6,19 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-header">
-    <h1>Your Profile</h1>
-</div>
+<section class = "component-container">
+    <div class = "section-container">
+        <div class="page-header">
+            <h1>Your Profile</h1>
+        </div>
 
-<form action="" method="post" class="form-container">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-    </table>
-    <button type="submit" class="btn submit">Create</button>
-</form>
+        <form action="" method="post" class="form-container" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <button type="submit" class="btn submit">Create</button>
+        </form>
+    </div>
+</section>
 {% endblock %}

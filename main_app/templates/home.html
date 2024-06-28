@@ -2,25 +2,23 @@
 {% load static %}
 
 {% block head %}
-{% comment %} <link rel="stylesheet" href="{% static 'css/home.css' %}" /> {% endcomment %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}" />
 {% endblock %}
 
 {% block content %}
-<section class="logo-container">
-    {% comment %} <div class="cat-container">
-        <img src="{% static 'images/splash.svg' %}" alt="The Cat Collector Cat" />
-    </div>
-    <img src="{% static 'images/logotype.svg' %}" alt="Text reads: Cat Collector" /> {% endcomment %}
-</section>
+<section class = "component-container">
+    <div class = "section-container">
 
-{% if not user.is_authenticated %}
-<section>
-    <form action="{% url 'home' %}" method="post" class="login">
-        <h1>Login</h1>
-        {% csrf_token %} {{ form.as_p }}
-        <input type="hidden" name="next" value="{{ next }}" />
-        <button type="submit" class="btn submit">Login</button>
-    </form>
+        {% if not user.is_authenticated %}
+        
+            <form action="{% url 'home' %}" method="post" class="login">
+                <h1>Login</h1>
+                {% csrf_token %} {{ form.as_p }}
+                <input type="hidden" name="next" value="{{ next }}" />
+                <button type="submit" class="btn submit">Login</button>
+            </form>
+
+    </div>
 </section>
 {% endif %}
 {% endblock %}
