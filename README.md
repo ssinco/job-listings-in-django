@@ -9,7 +9,10 @@ This project was created to demonstrate my learnings in using Django, a powerful
 
 
 ## Link to Deployment
-[https://ssinco.github.io/project-minesweeper/](https://job-listings-in-django-c643ba342330.herokuapp.com/)
+- [https://ssinco.github.io/project-minesweeper/](https://job-listings-in-django-c643ba342330.herokuapp.com/)
+- https://www.youtube.com/watch?v=fsVY66QBhwM
+- https://www.youtube.com/watch?v=t2_QNKODwy0
+
 
 ## Attributions
 Icons: https://www.flaticon.com/
