@@ -17,7 +17,11 @@
 <body>
         <header class ="nav-container">
             <div class="header-logo-container">
-                <a href="/">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'profile-index' %}">
+                {% else %}
+                <a href="{% url 'home' %}">
+                {% endif %}
                     <img src="{% static 'images/company_logo.png' %}" alt="company-logo"/>
                 </a>
             </div>
